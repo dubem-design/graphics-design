@@ -40,10 +40,23 @@ Longer-form notes to draw on while building specs. The short version lives in `S
 - `image({ src, style })` takes a URL or data URI; size it with width/height and clip with
   `borderRadius` + `overflow: "hidden"` on a wrapping container.
 
-## Iterate
+## Iterate (render mode)
 Render, then critique against this checklist before editing:
 1. Is there a single obvious focal point?
 2. Are there exactly ~3 colors doing the work?
 3. Is anything touching an edge that shouldn't?
 4. Does the type scale read as deliberate steps, not random sizes?
 5. Could removing an element make it stronger?
+
+## Pre-emit checklist (advise mode)
+When producing a DesignSpec for another renderer/tool instead of an image, run this
+against the spec **before** returning or flattening it — a lossy target can't fix a spec
+that was already wrong:
+1. Exactly one `headline`-role layer, at the largest size in the scale (one focal point)?
+2. Exactly ~3 palette roles, any extras only tints/shades (`ink-70`, `accent-20`)?
+3. 3–4 type roles with ~1.5–2× jumps, no two within ~10% of each other?
+4. `marginPct` ≥ 6 and no layer touching an edge unless a flagged, intentional bleed?
+5. One alignment system (a column or a centered stack, not both)?
+6. Could removing an element make it stronger? If yes, remove it.
+
+If any answer is "no," fix the spec — never translate a failing spec to a target.

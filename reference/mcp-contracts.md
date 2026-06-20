@@ -60,7 +60,7 @@ template's `title`/`subtitle`), flatten the DesignSpec into them but keep the hi
 intact — the largest slot gets the headline, never a secondary line.
 
 ## Crossing the boundary without losing the standards
-- Run the `design-standards.md` checklist on the DesignSpec **before** flattening; a lossy
+- Run the `design-principles.md` pre-emit checklist on the DesignSpec **before** flattening; a lossy
   target can't fix a spec that was already wrong.
 - If the tool can't express something the standard needs (e.g. no per-layer letter-spacing),
   say so in the rationale rather than silently dropping it.
