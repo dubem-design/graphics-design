@@ -1,56 +1,54 @@
 # graphics-design
 
-A Claude Agent Skill for creating polished static graphics — **posters, social/OG
-images, quote cards, and banners** — by filling a JSON layout template with data and
-rendering it to PNG/WebP with the [takumi](https://takumi.kane.tw) engine. No headless
-browser required.
+A repo of two complementary Claude Agent Skills for professional static graphics. One
+**renders** finished images; the other **advises** — structuring standards-compliant
+specs for other renderers and tool/MCP workflows.
+
+| Skill | Role | Output |
+| ----- | ---- | ------ |
+| [`graphics-render`](./skills/graphics-render) | Generate the actual graphic | a PNG/WebP/JPEG file (via the takumi engine, no browser) |
+| [`graphics-advisor`](./skills/graphics-advisor) | Structure the design to standard for *other* pipelines | a Satori/HTML/Figma spec or an MCP JSON contract |
+
+Both enforce the same design canon — one focal point, a disciplined type scale, a 3-role
+palette, generous margins. `graphics-render` bakes it into templates; `graphics-advisor`
+bakes it into the spec it hands to another renderer.
 
 ## Install
 
-Add the skill to your agent with [skills.sh](https://skills.sh):
+Both skills live in one repo on [skills.sh](https://skills.sh):
 
 ```bash
 npx skills add dubem-design/graphics-design
 ```
 
-## How it works
+The CLI discovers both skills under `skills/`; load whichever fits the task (or both).
 
-Graphics are defined as **JSON templates + data**:
+## When to use which
 
-- A **template** (`templates/*.json`) is a takumi node tree with `{{slot}}` placeholders.
-  It owns the layout, type scale, and spacing.
-- A **data file** (`data/*.json`) fills the slots — copy, colors, sizes.
-- The **render script** interpolates data into the template and produces an image.
+- **Want an image file?** → `graphics-render`. Fill a JSON template with data, render.
+- **Want a layout/spec for Satori, an OG route, HTML/email, Figma, or another tool/MCP
+  server?** → `graphics-advisor`. It emits a renderer-agnostic DesignSpec and translates
+  it to the target.
 
-This separation means you can restyle by editing the template, or re-skin/re-copy by
-editing only the data — without touching layout.
-
-## Quick start
+## graphics-render quick start
 
 ```bash
+cd skills/graphics-render
 npm install                                   # once: installs takumi
 node scripts/render.mjs templates/og.json     # data/og.json + out/og.png inferred
 ```
 
-Explicit paths and format:
+Templates included: `og` (1200×630), `poster` (1080×1350), `quote` (1080×1080),
+`banner` (1500×500). See [`skills/graphics-render/SKILL.md`](./skills/graphics-render/SKILL.md).
 
-```bash
-node scripts/render.mjs templates/og.json data/og.json out/og.webp --format webp
-```
+## graphics-advisor at a glance
 
-## Templates included
+Reason in one **DesignSpec** (canvas + palette + type scale + grid + layers), validate it
+against the standards checklist, then translate to the requested target:
 
-| Template      | Size      | Use                         |
-| ------------- | --------- | --------------------------- |
-| `og.json`     | 1200×630  | social / link-preview card  |
-| `poster.json` | 1080×1350 | editorial poster            |
-| `quote.json`  | 1080×1080 | centered serif quote card   |
-| `banner.json` | 1500×500  | wide banner with accent     |
+- Satori / `@vercel/og` → [`reference/satori.md`](./skills/graphics-advisor/reference/satori.md)
+- HTML / CSS / email → [`reference/html-css.md`](./skills/graphics-advisor/reference/html-css.md)
+- Figma nodes + tokens → [`reference/figma.md`](./skills/graphics-advisor/reference/figma.md)
+- MCP / tool JSON contracts → [`reference/mcp-contracts.md`](./skills/graphics-advisor/reference/mcp-contracts.md)
 
-Start from the closest one, copy it to a new name, and adjust.
-
-## Docs
-
-See [`SKILL.md`](./SKILL.md) for the full template anatomy, slot rules, takumi gotchas,
-and design principles, plus [`reference/design-principles.md`](./reference/design-principles.md)
-for longer composition notes.
+See [`skills/graphics-advisor/SKILL.md`](./skills/graphics-advisor/SKILL.md).

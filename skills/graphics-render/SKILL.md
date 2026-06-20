@@ -1,9 +1,13 @@
 ---
-name: graphics-design
-description: Create polished static graphics — posters, social/OG images, quote cards, banners — by filling a JSON layout template with data and rendering it to PNG/WebP with the takumi engine (no headless browser). Use when the user asks to design or generate a poster, social card, OG image, banner, or other static visual.
+name: graphics-render
+description: Generate finished static graphics — posters, social/OG images, quote cards, banners — by filling a JSON layout template with data and rendering it to a PNG/WebP/JPEG file with the takumi engine (no headless browser). Use when the user wants an actual image file produced. To instead structure design specs for another renderer (Satori, HTML/CSS, Figma) or an MCP data contract, use the graphics-advisor skill.
 ---
 
-# Graphics Design
+# Graphics Render
+
+> One of two skills in this repo. **graphics-render** (this one) produces image files.
+> **graphics-advisor** structures design specs to standard for *other* renderers and
+> MCP workflows without rendering. Pick render to get a PNG; pick advisor to get a spec.
 
 Design static graphics as **JSON templates + data**, rendered to images with
 [takumi](https://takumi.kane.tw) — a Rust engine that turns JSON node trees into
