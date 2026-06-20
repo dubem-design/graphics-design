@@ -1,0 +1,17 @@
+{
+  "name": "graphics-design",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Design static graphics as JSON templates + data and render them with takumi.",
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "og": "node scripts/render.mjs templates/og.json",
+    "poster": "node scripts/render.mjs templates/poster.json",
+    "quote": "node scripts/render.mjs templates/quote.json",
+    "banner": "node scripts/render.mjs templates/banner.json"
+  },
+  "dependencies": {
+    "@takumi-rs/core": "^1.8.6"
+  }
+}

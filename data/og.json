@@ -1,0 +1,11 @@
+{
+  "bg": "#0b1020",
+  "ink": "#ffffff",
+  "muted": "#9aa6c8",
+  "accent": "#6c8cff",
+  "eyebrow": "ENGINEERING BLOG",
+  "title": "Rendering images without a browser",
+  "subtitle": "How takumi turns JSON node trees into pixels in milliseconds.",
+  "brand": "takumi.dev",
+  "tag": "5 min read"
+}
