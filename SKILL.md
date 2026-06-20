@@ -19,6 +19,61 @@ templates; advise bakes it into the spec it hands off.
 
 ---
 
+## Start with a brief
+
+Before designing anything, settle the five things below. **Infer each from the user's
+prompt first; only ask about what's genuinely ambiguous, batch those into one round of
+questions, and lead every question with a sensible default the user can just confirm.**
+Don't interrogate — a good brief is two or three quick confirmations, not a form.
+
+**1. Deliverable → which mode.** A finished image file → **Render mode**. A layout/spec for
+another renderer, or a JSON handoff to a tool/MCP server → **Advise mode**. If unstated,
+assume Render (most common); switch to Advise only when the prompt points downstream
+("Satori", "OG route", "Figma", "email", "spec", "JSON for…").
+
+**2. Size / format.** Infer from the use case in the prompt before asking — e.g. "OG image"
+→ 1200×630, "Instagram post" → 1080×1080, "story" → 1080×1920, "poster" → 1080×1350,
+"banner" → 1500×500. If nothing implies a size, *suggest* the closest preset rather than
+asking blind:
+
+| Use | Size |
+| --- | --- |
+| OG / link preview | 1200×630 |
+| Instagram square | 1080×1080 |
+| Story / Reel / TikTok | 1080×1920 |
+| Editorial poster | 1080×1350 |
+| Wide banner / header | 1500×500 |
+| X / Twitter post | 1600×900 |
+
+**3. Content source.** Where does the copy come from?
+- **Inferred** — lift the headline/subhead from the prompt itself (default for one-offs).
+- **User-provided** — they give exact copy; use it **verbatim**, don't paraphrase.
+- **Batch (CSV / JSON)** — one row → one graphic. In Render mode, generate one data file per
+  row and loop the render script; in Advise mode, emit one DesignSpec per row. Confirm which
+  columns map to which slot (headline, subhead, tag, image…).
+
+**4. Reference / style.** Does the user have a reference image, or a style to emulate? If so,
+**confirm how to use it** — the three handling modes produce very different results:
+- **Full recreate** — match the reference's layout *and* copy as closely as the tools allow.
+  Always produce an *original interpretation* — never a pixel-for-pixel copy of someone
+  else's copyrighted work; rebuild the structure, don't trace the asset.
+- **Style only** — borrow the aesthetic (palette, type feel, composition energy) and apply
+  it to the user's own content.
+- **Same layout, new copy** — keep the reference's structure and styling, swap in different text.
+
+If there's no reference, optionally apply a named common style (Swiss/International,
+brutalist, editorial serif, minimal sans, etc.) — suggest one that fits the message rather
+than defaulting blandly.
+
+**5. Brand (optional).** Existing colors, fonts, or a logo? If provided, they override
+defaults — palette roles ← brand colors, `fonts` ← brand family, logo placed as an image
+node/layer. If not, choose a disciplined palette and a safe Google family per the canon.
+
+Once the brief is settled, proceed to the matching mode. Re-confirm later only if a choice
+would materially change the output.
+
+---
+
 ## Render mode
 
 Design static graphics as **JSON templates + data**, rendered to images with

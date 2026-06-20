@@ -11,6 +11,11 @@ Both modes enforce the same design canon: one focal point, a disciplined type sc
 3-role palette, generous margins. Render bakes it into templates; advise bakes it into the
 spec it hands off.
 
+Each job **starts with a short brief** — the skill infers what it can from your prompt and
+only asks about what's ambiguous: deliverable (image vs spec), size/format, content source
+(inferred / pasted / CSV batch), reference-or-style handling (full recreate, style only, or
+same layout with new copy), and any brand colors/fonts/logo. See [`SKILL.md`](./SKILL.md#start-with-a-brief).
+
 ## Install
 
 From [skills.sh](https://skills.sh):
